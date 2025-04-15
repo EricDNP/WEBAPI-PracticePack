@@ -112,6 +112,8 @@ Each Lambda handles a specific entity's CRUD operation using a **Router pattern*
 
 ## 🔖 Key Entities
 
+![image](https://github.com/user-attachments/assets/0c8fa47d-3e27-4c01-9015-0542db93688c)
+
 ### User & Person
 ```csharp
 User: Id, Username, Email, PasswordHash, Role
