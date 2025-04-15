@@ -2,9 +2,7 @@
 
 # PracticePack - Cloud-Native Product Delivery API
 
-PracticePack is a serverless product delivery application built on top of AWS Lambda using .NET 8, following the principles of **Hexagonal Architecture** to ensure strong separation of concerns, high scalability, and ease of testing.
-
-## 🎓 Project Overview
+## Project Overview
 
 This system manages:
 - **User authentication & role-based authorization**
@@ -16,7 +14,7 @@ All Lambda functions are deployed via **AWS SAM**, and the relational data is ho
 
 ---
 
-## 🚀 Architecture Overview
+## Architecture Overview
 
 The solution follows **Hexagonal Architecture (Ports & Adapters)**, broken into four main layers:
 
@@ -42,7 +40,7 @@ Each Lambda handles a specific entity's CRUD operation using a **Router pattern*
 
 ---
 
-## 🏃️ Workflows
+## Workflows
 
 ### Authentication Flow
 1. `/login` and `/register` endpoints in `LMBUserAuthentication`
@@ -56,7 +54,7 @@ Each Lambda handles a specific entity's CRUD operation using a **Router pattern*
 
 ---
 
-## 🚚 Deployment Stack
+## Deployment Stack
 
 - **Compute**: AWS Lambda (via AWS SAM)
 - **API Gateway**: AWS HTTP API (v2)
@@ -65,7 +63,7 @@ Each Lambda handles a specific entity's CRUD operation using a **Router pattern*
 
 ---
 
-## ⚖️ Technologies Used
+## Technologies Used
 
 - **.NET 8 / C#**
 - **Entity Framework Core**
@@ -77,7 +75,7 @@ Each Lambda handles a specific entity's CRUD operation using a **Router pattern*
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```bash
 /Domain
@@ -101,7 +99,7 @@ Each Lambda handles a specific entity's CRUD operation using a **Router pattern*
 
 ---
 
-## 🔐 Authentication & Authorization
+## Authentication & Authorization
 
 - JWT tokens are created on login.
 - Stored claims: `sub` (UserId), `role`, `email`
@@ -110,7 +108,9 @@ Each Lambda handles a specific entity's CRUD operation using a **Router pattern*
 
 ---
 
-## 🔖 Key Entities
+## Key Entities
+
+![image](https://github.com/user-attachments/assets/0c8fa47d-3e27-4c01-9015-0542db93688c)
 
 ### User & Person
 ```csharp
@@ -127,7 +127,7 @@ Payment: Id, OrderId, Method, Status
 
 ---
 
-## 🚧 Environment Variables
+## Environment Variables
 
 Set in `template.yaml`:
 ```yaml
@@ -141,14 +141,14 @@ Encryptor__IV: <AES IV>
 
 ---
 
-## 🚒 API Testing
+## API Testing
 
-- Postman collection available under `/docs/Postman/`
+- Postman collection available under `./PracticePack.postman_collection`
 - Sample JSON bodies and headers provided per endpoint
 
 ---
 
-## 🚧 Local Testing with AWS SAM
+## Local Testing with AWS SAM
 
 ```bash
 sam build
@@ -158,14 +158,10 @@ sam local start-api
 
 ---
 
-## 🌟 Final Notes
+## Final Notes
 
 - Full Hexagonal Architecture using AWS Lambdas ✅
 - All UseCases tested via DI ✅
 - RDS-connected EF Core Context ✅
 - Fully compatible with CI/CD and GitHub Actions ✅
-
----
-
-> Designed with scalability, testability, and serverless deployment in mind — built like a modern AWS-ready microservice system ✨
 
