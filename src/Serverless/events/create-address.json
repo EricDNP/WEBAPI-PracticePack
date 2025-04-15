@@ -1,0 +1,17 @@
+{
+  "version": "2.0",
+  "routeKey": "POST /addresses",
+  "rawPath": "/addresses",
+  "rawQueryString": "",
+  "headers": {
+    "content-type": "application/json"
+  },
+  "requestContext": {
+    "http": {
+      "method": "POST",
+      "path": "/addresses"
+    }
+  },
+  "body": "{\"Label\": \"Mi casa\",\"Address1\": \"Calle 9 8\",\"Address2\": \"Sector Amapola\",\"City\": \"Santo Domingo Este\",\"State\": \"Santo Domingo\",\"ZipCode\": \"11519\",\"Default\": \"true\"}",
+  "isBase64Encoded":  false
+}

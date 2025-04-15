@@ -1,0 +1,268 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: WEBAPI-PracticePack Project
+
+Globals:
+    Function:
+        Runtime: dotnet8
+        Timeout: 30
+        MemorySize: 256
+        Architectures:
+            - x86_64
+        Environment:
+            Variables:
+                ASPNETCORE_ENVIRONMENT: "Development"
+                TokenSettings__JwtSecret: "0k3xHDGOQvG4zC2d8BoI+Y2ihmLkEvM8ukQSTT8hfx8/ByU2AjbE3b9+a2eQU2qKh1nDh7CzJfA6xDHphEZr9Q=="
+                TokenSettings__Issuer: "myapp.auth"
+                TokenSettings__Audience: "myapp.api"
+                TokenSettings__Expiration: "5"
+                EncryptionSettings__Key: "vL4Y0M3ECaZKJx6vBZZKceP9DpzLtuhI2iQOwVVoqB8="
+                EncryptionSettings__IV: "I6L6U8u92wlvYoV7SPm8Tw=="
+                AppSettings__DbConnection: "Server=host.docker.internal,1433;Database=PracticePackDb;User Id=practicepack_user;Password=Practice!Pack1234;TrustServerCertificate=True"
+
+Resources:
+
+    LMBAddressCRUD:
+        Type: AWS::Serverless::Function
+        Properties:
+            Handler: LMBAddressCRUD::LMBAddressCRUD.Router::FunctionHandler
+            CodeUri: ./Lambdas/LMBAddressCRUD
+            Role: arn:aws:iam::549273701895:role/PracticePackLambdaExecutionRole
+            Events:
+                GetAddresses:
+                    Type: HttpApi
+                    Properties:
+                        Path: /addresses
+                        Method: GET
+                GetAddress:
+                    Type: HttpApi
+                    Properties:
+                        Path: /addresses/{id}
+                        Method: GET
+                CreateAddress:
+                    Type: HttpApi
+                    Properties:
+                        Path: /addresses
+                        Method: POST
+                UpdateAddress:
+                    Type: HttpApi
+                    Properties:
+                        Path: /addresses/{id}
+                        Method: PUT
+                DeleteAddress:
+                    Type: HttpApi
+                    Properties:
+                        Path: /addresses/{id}
+                        Method: DELETE
+                        
+    LMBCategoryCRUD:
+        Type: AWS::Serverless::Function
+        Properties:
+            Handler: LMBCategoryCRUD::LMBCategoryCRUD.Router::FunctionHandler
+            CodeUri: ./Lambdas/LMBCategoryCRUD
+            Role: arn:aws:iam::549273701895:role/PracticePackLambdaExecutionRole
+            Events:
+                GetCategories:
+                    Type: HttpApi
+                    Properties:
+                        Path: /categories
+                        Method: GET
+                GetCategory:
+                    Type: HttpApi
+                    Properties:
+                        Path: /categories/{id}
+                        Method: GET
+                CreateCategory:
+                    Type: HttpApi
+                    Properties:
+                        Path: /categories
+                        Method: POST
+                UpdateCategory:
+                    Type: HttpApi
+                    Properties:
+                        Path: /categories/{id}
+                        Method: PUT
+                DeleteCategory:
+                    Type: HttpApi
+                    Properties:
+                        Path: /categories/{id}
+                        Method: DELETE
+                        
+    LMBOrderCRUD:
+        Type: AWS::Serverless::Function
+        Properties:
+            Handler: LMBOrderCRUD::LMBOrderCRUD.Router::FunctionHandler
+            CodeUri: ./Lambdas/LMBOrderCRUD
+            Role: arn:aws:iam::549273701895:role/PracticePackLambdaExecutionRole
+            Events:
+                GetOrders:
+                    Type: HttpApi
+                    Properties:
+                        Path: /orders
+                        Method: GET
+                GetOrder:
+                    Type: HttpApi
+                    Properties:
+                        Path: /orders/{id}
+                        Method: GET
+                CreateOrder:
+                    Type: HttpApi
+                    Properties:
+                        Path: /orders
+                        Method: POST
+                UpdateOrder:
+                    Type: HttpApi
+                    Properties:
+                        Path: /orders/{id}
+                        Method: PUT
+                DeleteOrder:
+                    Type: HttpApi
+                    Properties:
+                        Path: /orders/{id}
+                        Method: DELETE
+                        
+    LMBOrderItemCRUD:
+        Type: AWS::Serverless::Function
+        Properties:
+            Handler: LMBOrderItemCRUD::LMBOrderItemCRUD.Router::FunctionHandler
+            CodeUri: ./Lambdas/LMBOrderItemCRUD
+            Role: arn:aws:iam::549273701895:role/PracticePackLambdaExecutionRole
+            Events:
+                GetOrderItems:
+                    Type: HttpApi
+                    Properties:
+                        Path: /orderitems
+                        Method: GET
+                GetOrderItem:
+                    Type: HttpApi
+                    Properties:
+                        Path: /orderitems/{id}
+                        Method: GET
+                CreateOrderItem:
+                    Type: HttpApi
+                    Properties:
+                        Path: /orderitems
+                        Method: POST
+                UpdateOrderItem:
+                    Type: HttpApi
+                    Properties:
+                        Path: /orderitems/{id}
+                        Method: PUT
+                DeleteOrderItem:
+                    Type: HttpApi
+                    Properties:
+                        Path: /orderitems/{id}
+                        Method: DELETE
+
+    LMBPaymentCRUD:
+        Type: AWS::Serverless::Function
+        Properties:
+            Handler: LMBPaymentCRUD::LMBPaymentCRUD.Router::FunctionHandler
+            CodeUri: ./Lambdas/LMBPaymentCRUD
+            Role: arn:aws:iam::549273701895:role/PracticePackLambdaExecutionRole
+            Events:
+                GetPayments:
+                    Type: HttpApi
+                    Properties:
+                        Path: /payments
+                        Method: GET
+                GetPayment:
+                    Type: HttpApi
+                    Properties:
+                        Path: /payments/{id}
+                        Method: GET
+                CreatePayment:
+                    Type: HttpApi
+                    Properties:
+                        Path: /payments
+                        Method: POST
+                UpdatePayment:
+                    Type: HttpApi
+                    Properties:
+                        Path: /payments/{id}
+                        Method: PUT
+                DeletePayment:
+                    Type: HttpApi
+                    Properties:
+                        Path: /payments/{id}
+                        Method: DELETE
+                        
+    LMBProductCRUD:
+        Type: AWS::Serverless::Function
+        Properties:
+            Handler: LMBProductCRUD::LMBProductCRUD.Router::FunctionHandler
+            CodeUri: ./Lambdas/LMBProductCRUD
+            Role: arn:aws:iam::549273701895:role/PracticePackLambdaExecutionRole
+            Events:
+                GetProducts:
+                    Type: HttpApi
+                    Properties:
+                        Path: /products
+                        Method: GET
+                GetProduct:
+                    Type: HttpApi
+                    Properties:
+                        Path: /products/{id}
+                        Method: GET
+                CreateProduct:
+                    Type: HttpApi
+                    Properties:
+                        Path: /products
+                        Method: POST
+                UpdateProduct:
+                    Type: HttpApi
+                    Properties:
+                        Path: /products/{id}
+                        Method: PUT
+                DeleteProduct:
+                    Type: HttpApi
+                    Properties:
+                        Path: /products/{id}
+                        Method: DELETE
+
+    LMBUserAuthentication:
+        Type: AWS::Serverless::Function
+        Properties:
+            Handler: LMBUserAuthentication::LMBUserAuthentication.Router::FunctionHandler
+            CodeUri: ./Lambdas/LMBUserAuthentication
+            Role: arn:aws:iam::549273701895:role/PracticePackLambdaExecutionRole
+            Events:
+                LoginUser:
+                    Type: HttpApi
+                    Properties:
+                        Path: /users/register
+                        Method: POST
+                RegisterUser:
+                    Type: HttpApi
+                    Properties:
+                        Path: /users/login
+                        Method: POST
+                        
+    LMBUserCRUD:
+        Type: AWS::Serverless::Function
+        Properties:
+            Handler: LMBUserCRUD::LMBUserCRUD.Router::FunctionHandler
+            CodeUri: ./Lambdas/LMBUserCRUD
+            Role: arn:aws:iam::549273701895:role/PracticePackLambdaExecutionRole
+            Events:
+                GetUsers:
+                    Type: HttpApi
+                    Properties:
+                        Path: /users
+                        Method: GET
+                GetUser:
+                    Type: HttpApi
+                    Properties:
+                        Path: /users/{id}
+                        Method: GET
+                UpdateUser:
+                    Type: HttpApi
+                    Properties:
+                        Path: /users/{id}
+                        Method: PUT
+                DeleteUser:
+                    Type: HttpApi
+                    Properties:
+                        Path: /users/{id}
+                        Method: DELETE
+                
