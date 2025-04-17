@@ -9,17 +9,27 @@ Globals:
         MemorySize: 256
         Architectures:
             - x86_64
+        VpcConfig:
+            SecurityGroupIds:
+                - sg-00396734696631e46
+            SubnetIds:
+                - subnet-0f050bfa156443931
+                - subnet-062332a5224055f5b
+                - subnet-0d21b79c06fd4978a
+                - subnet-086df13f0d7cebf79
+                - subnet-0e9ae95d4717cc3e0
+                - subnet-0913327f58fb5d442
         Environment:
             Variables:
                 ASPNETCORE_ENVIRONMENT: "Development"
-                TokenSettings__JwtSecret: "0k3xHDGOQvG4zC2d8BoI+Y2ihmLkEvM8ukQSTT8hfx8/ByU2AjbE3b9+a2eQU2qKh1nDh7CzJfA6xDHphEZr9Q=="
-                TokenSettings__Issuer: "myapp.auth"
+                TokenSettings__JwtSecret: "wyg01ckCD4XFt9zC6AwRuh9yoCz19Q6+xdUacWBJ69DPd+w2vbnHUKf37mALjrmn5i8fK3I88Y4E77GCHiK4JzA=="
+                TokenSettings__Issuer: "PracticeApp.auth"
                 TokenSettings__Audience: "myapp.api"
-                TokenSettings__Expiration: "5"
-                EncryptionSettings__Key: "vL4Y0M3ECaZKJx6vBZZKceP9DpzLtuhI2iQOwVVoqB8="
-                EncryptionSettings__IV: "I6L6U8u92wlvYoV7SPm8Tw=="
-                AppSettings__DbConnection: "Server=host.docker.internal,1433;Database=PracticePackDb;User Id=practicepack_user;Password=Practice!Pack1234;TrustServerCertificate=True"
-
+                TokenSettings__Expiration: 1
+                EncryptionSettings__Key: "uOJjHE9WiPNjx7iZXw6IxxW+XYzljY0hz+U6pRgU2bE="
+                EncryptionSettings__IV: "CctFoW9NOBDImDAEoL8BUA=="
+                AppSettings__DbConnection: "Server=practicepack-db.c6hik6wcaroy.us-east-1.rds.amazonaws.com,1433;Database=PracticePackDB;User Id=admin;Password=4rRNu!bf&G;TrustServerCertificate=True;"
+                
 Resources:
 
     LMBAddressCRUD:

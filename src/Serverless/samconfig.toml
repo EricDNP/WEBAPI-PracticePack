@@ -1,0 +1,18 @@
+version = 0.1
+[qa.deploy.parameters]
+stack_name = "rapidpack-stack"
+resolve_s3 = true
+s3_prefix = "rapidpack-stack"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
+
+[default.deploy.parameters]
+stack_name = "rapidpack-stack"
+resolve_s3 = true
+s3_prefix = "rapidpack-stack"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
