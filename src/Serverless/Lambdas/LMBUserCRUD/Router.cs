@@ -1,4 +1,4 @@
-using Domain.Entities;
+using Serverless.Helper;
 using Serverless.Handler;
 using Amazon.Lambda.Core;
 using Serverless.Configuration;
@@ -20,10 +20,11 @@ public class Router
 
     public async Task<APIGatewayHttpApiV2ProxyResponse> FunctionHandler(APIGatewayHttpApiV2ProxyRequest request)
     {
-        if (AuthorizationHandler.GetUserInfo(request, _provider) == null)
-            return AuthorizationHandler.Unauthorized();
-
-        return await RouteAsync(request);
+        return await FunctionHandlerHelper.HandleFunction(async () =>
+        {
+            var user = AuthorizationHandler.CheckAuthorization(request, _provider);
+            return await RouteAsync(request);
+        });
     }
 
     private async Task<APIGatewayHttpApiV2ProxyResponse> RouteAsync(APIGatewayHttpApiV2ProxyRequest request)
@@ -41,12 +42,12 @@ public class Router
                     return await Handlers.DELETE(request, _provider);
 
                 default:
-                    return BaseHandler<User>.ERROR(new { Message = "Metodo Invalido" });
+                    return ErrorHandler.HandleGeneric(new { Message = "Metodo Invalido" });
             }
         }
         else
         {
-            return BaseHandler<User>.ERROR(new { Message = "Metodo Invalido" });
+            return ErrorHandler.HandleGeneric(new { Message = "Metodo Invalido" });
         }
     }
 }

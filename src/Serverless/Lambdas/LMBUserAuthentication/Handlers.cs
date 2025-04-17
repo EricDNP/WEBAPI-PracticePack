@@ -1,10 +1,9 @@
-﻿using Domain.Entities;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Serverless.Handler;
+using Infrastructure.Configuration;
 using Amazon.Lambda.APIGatewayEvents;
 using Application.UseCases.Users.LoginUser;
 using Microsoft.Extensions.DependencyInjection;
-using Infrastructure.Configuration;
 using Application.UseCases.Users.RegisterUser;
 
 namespace LMBUserAuthentication
@@ -18,13 +17,12 @@ namespace LMBUserAuthentication
             var dto = JsonSerializer.Deserialize<LoginUserInput>(request.Body);
 
             if (dto == null)
-                return BaseHandler<User>.ERROR(new { Message = "Se ingreso un cuerpo invalido." });
+                return ErrorHandler.HandleGeneric(new { Message = "Se ingreso un cuerpo invalido." });
 
             var response = await useCase.Login(dto);
 
             if (response != null)
             {
-
                 AuthenticationManager.GetUserInfo(response?.Token, provider);
 
                 return new APIGatewayHttpApiV2ProxyResponse()
@@ -34,7 +32,7 @@ namespace LMBUserAuthentication
                 };
             }
             else
-                return BaseHandler<User>.ERROR(new { Message = "Usuario no Encontrado" }, 401);
+                return ErrorHandler.HandleGeneric(new { Message = "Usuario no Encontrado" }, 401);
         }
 
         public static async Task<APIGatewayHttpApiV2ProxyResponse> Register(APIGatewayHttpApiV2ProxyRequest request, IServiceProvider provider)
@@ -44,7 +42,7 @@ namespace LMBUserAuthentication
             var dto = JsonSerializer.Deserialize<RegisterUserInput>(request.Body);
 
             if (dto == null)
-                return BaseHandler<User>.ERROR(new { Message = "Se ingreso un cuerpo invalido." });
+                return ErrorHandler.HandleGeneric(new { Message = "Se ingreso un cuerpo invalido." });
 
             var response = await useCase.Register(dto);
 

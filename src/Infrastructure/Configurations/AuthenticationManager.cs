@@ -53,13 +53,9 @@ namespace Infrastructure.Configuration
 
         public static UserAuth? GetUserInfoFromHeader(string authHeader, IServiceProvider provider)
         {
-            Console.WriteLine("Has valid header");
-
-            if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
+            if (!string.IsNullOrEmpty(authHeader) && authHeader.ToLower().StartsWith("bearer "))
             {
-                Console.WriteLine("Has correct header");
-
-                var token = authHeader["Bearer ".Length..].Trim();
+                var token = authHeader["bearer ".Length..].Trim();
                 return GetUserInfo(token, provider);
             }
 
@@ -75,8 +71,6 @@ namespace Infrastructure.Configuration
             {
                 var principal = handler.ValidateToken(token, validationParemetrs, out _);
                 var accessor = provider.GetRequiredService<IHttpContextAccessor>();
-
-                Console.WriteLine("Has valid claims");
 
                 AccessUser(principal, accessor);
 

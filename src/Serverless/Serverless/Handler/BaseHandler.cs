@@ -28,7 +28,7 @@ namespace Serverless.Handler
                     body = JsonSerializer.Serialize(result);
                 }
                 else
-                    return ERROR(new { Message = "Se ingreso un id invalido." });
+                    return ErrorHandler.HandleGeneric(new { Message = "Se ingreso un id invalido." });
             }
 
             return new APIGatewayHttpApiV2ProxyResponse
@@ -47,7 +47,7 @@ namespace Serverless.Handler
             var dto = JsonSerializer.Deserialize<TInput>(request.Body);
 
             if (dto == null)
-                return ERROR(new { Message = "Se ingreso un cuerpo invalido." });
+                return ErrorHandler.HandleGeneric(new { Message = "Se ingreso un cuerpo invalido." });
 
             var result = await useCase.Create(dto);
 
@@ -65,12 +65,12 @@ namespace Serverless.Handler
             where TOutput : class
         {
             if (!Guid.TryParse(request.PathParameters["id"], out Guid id))
-                return ERROR(new { Message = "Se ingreso un id invalido." });
+                return ErrorHandler.HandleGeneric(new { Message = "Se ingreso un id invalido." });
 
             var dto = JsonSerializer.Deserialize<TInput>(request.Body);
 
             if (dto == null)
-                return ERROR(new { Message = "Se ingreso un cuerpo invalido." });
+                return ErrorHandler.HandleGeneric(new { Message = "Se ingreso un cuerpo invalido." });
 
             var result = await useCase.Update(dto, id);
 
@@ -86,7 +86,7 @@ namespace Serverless.Handler
             APIGatewayHttpApiV2ProxyRequest request)
         {
             if (!Guid.TryParse(request.PathParameters["id"], out Guid id))
-                return ERROR(new { Message = "Se ingreso un id invalido." });
+                return ErrorHandler.HandleGeneric(new { Message = "Se ingreso un id invalido." });
 
             var result = await useCase.Remove(id);
 
@@ -94,15 +94,6 @@ namespace Serverless.Handler
             {
                 StatusCode = 204,
                 Body = JsonSerializer.Serialize(result)
-            };
-        }
-
-        public static APIGatewayHttpApiV2ProxyResponse ERROR(object errorBody, int code = 500)
-        {
-            return new APIGatewayHttpApiV2ProxyResponse
-            {
-                StatusCode = code,
-                Body = JsonSerializer.Serialize(errorBody)
             };
         }
     }
