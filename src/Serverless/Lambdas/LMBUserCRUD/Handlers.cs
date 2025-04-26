@@ -1,7 +1,6 @@
 ﻿using Domain.Entities;
 using Serverless.Handler;
 using Amazon.Lambda.APIGatewayEvents;
-using Application.UseCases.Users.ManageUser;
 using Application.UseCases.Users.RemoveUser;
 using Application.UseCases.Users.SearchUser;
 using Microsoft.Extensions.DependencyInjection;

@@ -33,7 +33,7 @@ namespace Infrastructure.Configuration
             {
                 ValidateIssuer = false,
                 ValidateAudience = false,
-                ValidateLifetime = false,
+                ValidateLifetime = true,
                 ValidateIssuerSigningKey = false,
                 IssuerSigningKey = new SymmetricSecurityKey(encodedKey)
             };
@@ -76,9 +76,14 @@ namespace Infrastructure.Configuration
 
                 return GetUserFromClaims(principal);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en TRY");
+                Console.WriteLine("Message: " + ex.Message);
+                Console.WriteLine("Exception: " + ex.InnerException);
 
-            return null;
+                return null;
+            }
         }
 
         public static void AccessUser(ClaimsPrincipal claims, IHttpContextAccessor accessor)
