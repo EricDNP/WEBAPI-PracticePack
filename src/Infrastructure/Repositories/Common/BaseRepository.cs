@@ -1,5 +1,5 @@
-﻿using Domain.Interfaces.Common;
-using Infrastructure.Context;
+﻿using Infrastructure.Context;
+using Domain.Interfaces.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories.Common
@@ -23,7 +23,7 @@ namespace Infrastructure.Repositories.Common
         public async Task<TEntity> Get(Guid id)
         {
             var entity = await _db.Where(x => x.Id == id).FirstOrDefaultAsync();
-            if (entity is null) throw new Exception($"{nameof(TEntity)} not found");
+            if (entity is null) throw new KeyNotFoundException($"{typeof(TEntity).Name} not found");
             return entity;
         }
 

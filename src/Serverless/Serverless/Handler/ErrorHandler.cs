@@ -25,6 +25,21 @@ namespace Serverless.Handler
             };
         }
 
+        public static APIGatewayHttpApiV2ProxyResponse NotFound(KeyNotFoundException ex)
+        {
+            Console.WriteLine("ERROR: " + ex.Message);
+            Console.WriteLine("EXCEPTION: " + ex.InnerException);
+            return new APIGatewayHttpApiV2ProxyResponse()
+            {
+                StatusCode = 404,
+                Body = JsonSerializer.Serialize(new
+                {
+                    Error = ex.Message,
+                    Exception = ex.InnerException
+                })
+            };
+        }
+
         public static APIGatewayHttpApiV2ProxyResponse HandleException(Exception ex)
         {
             Console.WriteLine("ERROR: " + ex.Message);

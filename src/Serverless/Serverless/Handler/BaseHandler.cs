@@ -15,12 +15,9 @@ namespace Serverless.Handler
         {
             string body = "";
 
-            if (!request.PathParameters.TryGetValue("id", out string? id))
-            {
-                var result = await useCase.SearchAll();
-                body = JsonSerializer.Serialize(result);
-            }
-            else
+            var paths = request.PathParameters;
+
+            if (paths != null && paths.TryGetValue("id", out string? id))
             {
                 if (Guid.TryParse(id, out Guid parsedId))
                 {
@@ -30,6 +27,11 @@ namespace Serverless.Handler
                 else
                     return ErrorHandler.HandleGeneric(new { Message = "Se ingreso un id invalido." });
             }
+            else
+            {
+                var result = await useCase.SearchAll();
+                body = JsonSerializer.Serialize(result);
+            }
 
             return new APIGatewayHttpApiV2ProxyResponse
             {
@@ -38,7 +40,7 @@ namespace Serverless.Handler
             };
         }
 
-        public static async Task<APIGatewayHttpApiV2ProxyResponse> POST<TInput,TOutput>(
+        public static async Task<APIGatewayHttpApiV2ProxyResponse> POST<TInput, TOutput>(
             IBaseManageUseCase<TEntity, TInput, TOutput> useCase,
             APIGatewayHttpApiV2ProxyRequest request)
             where TInput : class

@@ -15,6 +15,10 @@ namespace Serverless.Helper
             {
                 return ErrorHandler.HandleUnauthorized();
             }
+            catch (KeyNotFoundException ex)
+            {
+                return ErrorHandler.NotFound(ex);
+            }
             catch (Exception ex)
             {
                 return ErrorHandler.HandleException(ex);
