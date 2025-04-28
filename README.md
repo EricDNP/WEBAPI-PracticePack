@@ -1,6 +1,13 @@
 # WEBAPI-PracticePack
 
-# PracticePack - Cloud-Native Product Delivery API
+PracticePack - Cloud-Native Product Delivery API
+
+## Project Delivery Info
+
+Hi, my name is Eric and this is the WebApi project.
+To consume the API you can use the postman collection in the code.
+Or consume this endpoint:
+  https://by8gfx9100.execute-api.us-east-1.amazonaws.com
 
 ## Project Overview
 
