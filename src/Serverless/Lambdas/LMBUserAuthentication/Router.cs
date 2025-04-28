@@ -22,6 +22,7 @@ public class Router
     {
         return await FunctionHandlerHelper.HandleFunction(async () =>
         {
+            FunctionHandlerHelper.HandleLog(request);
             return await RouteAsync(request);
         });
     }

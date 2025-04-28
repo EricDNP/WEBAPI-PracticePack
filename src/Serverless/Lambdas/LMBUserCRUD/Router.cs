@@ -22,6 +22,7 @@ public class Router
     {
         return await FunctionHandlerHelper.HandleFunction(async () =>
         {
+            FunctionHandlerHelper.HandleLog(request);
             var user = AuthorizationHandler.CheckAuthorization(request, _provider);
             return await RouteAsync(request);
         });

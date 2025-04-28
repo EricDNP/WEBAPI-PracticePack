@@ -1,5 +1,6 @@
 ﻿using Serverless.Handler;
 using Amazon.Lambda.APIGatewayEvents;
+using System.Text.Json;
 
 namespace Serverless.Helper
 {
@@ -23,6 +24,12 @@ namespace Serverless.Helper
             {
                 return ErrorHandler.HandleException(ex);
             }
+        }
+        public static void HandleLog(APIGatewayHttpApiV2ProxyRequest request)
+        {
+            Console.WriteLine("Path Received: " + request.RawPath);
+            Console.WriteLine("Query Received: " + request.RawQueryString);
+            Console.WriteLine("Body received: " + request.Body);
         }
     }
 }

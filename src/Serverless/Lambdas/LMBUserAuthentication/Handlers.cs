@@ -14,7 +14,7 @@ namespace LMBUserAuthentication
         {
             var useCase = provider.GetRequiredService<ILoginUserUseCase>();
 
-            var dto = JsonSerializer.Deserialize<LoginUserInput>(request.Body);
+            var dto = SerializerHandle.Deserialize<LoginUserInput>(request.Body);
 
             if (dto == null)
                 return ErrorHandler.HandleGeneric(new { Message = "Se ingreso un cuerpo invalido." });
@@ -39,7 +39,7 @@ namespace LMBUserAuthentication
         {
             var useCase = provider.GetRequiredService<IRegisterUserUseCase>();
 
-            var dto = JsonSerializer.Deserialize<RegisterUserInput>(request.Body);
+            var dto = SerializerHandle.Deserialize<RegisterUserInput>(request.Body);
 
             if (dto == null)
                 return ErrorHandler.HandleGeneric(new { Message = "Se ingreso un cuerpo invalido." });

@@ -46,7 +46,7 @@ namespace Serverless.Handler
             where TInput : class
             where TOutput : class
         {
-            var dto = JsonSerializer.Deserialize<TInput>(request.Body);
+            var dto = SerializerHandle.Deserialize<TInput>(request.Body);
 
             if (dto == null)
                 return ErrorHandler.HandleGeneric(new { Message = "Se ingreso un cuerpo invalido." });
@@ -69,7 +69,7 @@ namespace Serverless.Handler
             if (!Guid.TryParse(request.PathParameters["id"], out Guid id))
                 return ErrorHandler.HandleGeneric(new { Message = "Se ingreso un id invalido." });
 
-            var dto = JsonSerializer.Deserialize<TInput>(request.Body);
+            var dto = SerializerHandle.Deserialize<TInput>(request.Body);
 
             if (dto == null)
                 return ErrorHandler.HandleGeneric(new { Message = "Se ingreso un cuerpo invalido." });
