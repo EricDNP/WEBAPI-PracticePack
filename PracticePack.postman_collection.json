@@ -670,9 +670,21 @@
 			"item": [
 				{
 					"name": "GET",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{base_url}}/users",
 							"host": [
@@ -691,13 +703,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/users/{id}",
+							"raw": "{{base_url}}/users/1a3a1788-8afb-421f-919d-0992c1219450",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"users",
-								"{id}"
+								"1a3a1788-8afb-421f-919d-0992c1219450"
 							]
 						}
 					},
@@ -742,6 +754,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -833,8 +848,18 @@
 	],
 	"variable": [
 		{
+			"key": "base_url",
+			"value": "https://by8gfx9100.execute-api.us-east-1.amazonaws.com",
+			"type": "string"
+		},
+		{
 			"key": "bearer_token",
 			"value": ""
+		},
+		{
+			"key": "local",
+			"value": "http://127.0.0.1:3000",
+			"type": "string"
 		}
 	]
 }
