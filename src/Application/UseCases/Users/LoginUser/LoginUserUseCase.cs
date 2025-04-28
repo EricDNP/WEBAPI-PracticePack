@@ -31,8 +31,6 @@ namespace Application.UseCases.Users.LoginUser
             var dto = _mapper.Map<User>(input);
             dto.Password = _encryptorService.Encrypt(dto.Password);
 
-            Console.WriteLine("Encrpyed Login Password: " + dto.Password);
-
             var entity = await _userRepository
                 .Query()
                 .FirstOrDefaultAsync(u =>
